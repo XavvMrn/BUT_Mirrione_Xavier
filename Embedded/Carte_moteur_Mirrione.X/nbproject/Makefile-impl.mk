@@ -24,7 +24,7 @@ CLEAN_SUBPROJECTS=${CLEAN_SUBPROJECTS_${SUBPROJECTS}}
 
 
 # Project Name
-PROJECTNAME=Carte_moteur_Mirrione..X
+PROJECTNAME=Carte_moteur_Mirrione.X
 
 # Active Configuration
 DEFAULTCONF=default
