@@ -7,6 +7,8 @@
       <itemPath>ChipConfig.h</itemPath>
       <itemPath>IO.h</itemPath>
       <itemPath>timer.h</itemPath>
+      <itemPath>robot.h</itemPath>
+      <itemPath>toolbox.h</itemPath>
     </logicalFolder>
     <logicalFolder name="LinkerScript"
                    displayName="Linker Files"
@@ -19,6 +21,8 @@
       <itemPath>ChipConfig.c</itemPath>
       <itemPath>IO.c</itemPath>
       <itemPath>timer.c</itemPath>
+      <itemPath>robot.c</itemPath>
+      <itemPath>toolbox.c</itemPath>
     </logicalFolder>
     <logicalFolder name="ExternalFiles"
                    displayName="Important Files"
