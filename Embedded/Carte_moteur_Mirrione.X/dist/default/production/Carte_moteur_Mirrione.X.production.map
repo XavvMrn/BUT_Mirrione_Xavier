@@ -108,10 +108,10 @@ Default Scalar Model: Small
 section                    address   length (PC units)   length (bytes) (dec)
 -------                    -------   -----------------   --------------------
 .text                        0x200               0x35a           0x507  (1287)
-.text                        0x55a               0x24a           0x36f  (879)
-.dinit                       0x7a4                0x10            0x18  (24)
+.text                        0x55a               0x282           0x3c3  (963)
+.dinit                       0x7dc                0x10            0x18  (24)
 
-                 Total "program" memory used (bytes):          0x88e  (2190) <1%
+                 Total "program" memory used (bytes):          0x8e2  (2274) <1%
 
 
 "data" Memory  [Origin = 0x1000, Length = 0xc000]
@@ -178,22 +178,22 @@ External Symbols in Program Memory (by address):
                   0x000650                  _DegreeToRadian
                   0x000668                  _InitPWM
                   0x0006a0                  _PWMSetSpeed
-                  0x0006c8                  _InitOscillator
-                  0x00071e                  _InitTimer23
-                  0x000750                  _InitTimer1
-                  0x00076c                  _InitIO
-                  0x00078a                  _main
+                  0x000702                  _InitOscillator
+                  0x000758                  _InitTimer23
+                  0x00078a                  _InitTimer1
+                  0x0007a6                  _InitIO
+                  0x0007c4                  _main
                   0x0557fa                  __FGS.sec
 
 External Symbols in Program Memory (by name):
 
                   0x00055a                  _Abs
                   0x000650                  _DegreeToRadian
-                  0x00076c                  _InitIO
-                  0x0006c8                  _InitOscillator
+                  0x0007a6                  _InitIO
+                  0x000702                  _InitOscillator
                   0x000668                  _InitPWM
-                  0x000750                  _InitTimer1
-                  0x00071e                  _InitTimer23
+                  0x00078a                  _InitTimer1
+                  0x000758                  _InitTimer23
                   0x0005e6                  _LimitToInterval
                   0x000586                  _Max
                   0x0005b6                  _Min
@@ -222,7 +222,7 @@ External Symbols in Program Memory (by name):
                   0x00048c                  __funpack2
                   0x00023c                  __psv_init
                   0x000200                  __resetPRI
-                  0x00078a                  _main
+                  0x0007c4                  _main
 
 Memory Configuration
 
@@ -357,7 +357,8 @@ __FOSCSEL
 
 __FGS             0x0557fa          0x2
  *(__FGS.sec*)
- __FGS.sec        0x0557fa          0x2 /CW/_FGS ú
+ __FGS.sec        0x0557fa          0x2 /CW/_FGS´
+
                   0x0557fa                  __FGS.sec
 
 __FUID0
@@ -396,7 +397,7 @@ __FUID3
  .debug_abbrev    0x00034e         0x6d build/default/production/toolbox.o
  .debug_abbrev    0x0003bb        0x145 build/default/production/pwm.o
 
-.debug_line       0x000000        0x641
+.debug_line       0x000000        0x649
  *(.debug_line)
  .debug_line      0x000000        0x117 build/default/production/main.o
  .debug_line      0x000117        0x11e build/default/production/ChipConfig.o
@@ -404,16 +405,16 @@ __FUID3
  .debug_line      0x00034f        0x141 build/default/production/timer.o
  .debug_line      0x000490         0x30 build/default/production/robot.o
  .debug_line      0x0004c0         0x54 build/default/production/toolbox.o
- .debug_line      0x000514        0x12d build/default/production/pwm.o
+ .debug_line      0x000514        0x135 build/default/production/pwm.o
 
-.debug_frame      0x000000        0x232
+.debug_frame      0x000000        0x23a
  *(.debug_frame)
  .debug_frame     0x000000         0x2e build/default/production/main.o
  .debug_frame     0x00002e         0x2e build/default/production/ChipConfig.o
  .debug_frame     0x00005c         0x2e build/default/production/IO.o
  .debug_frame     0x00008a         0x90 build/default/production/timer.o
  .debug_frame     0x00011a         0xd0 build/default/production/toolbox.o
- .debug_frame     0x0001ea         0x48 build/default/production/pwm.o
+ .debug_frame     0x0001ea         0x50 build/default/production/pwm.o
 
 .debug_str        0x000000         0xe4
  *(.debug_str)
@@ -2296,7 +2297,8 @@ LOAD c:/program files/microchip/xc16/v1.60/bin/bin/../../lib\libm-elf.a
 LOAD c:/program files/microchip/xc16/v1.60/bin/bin/../../lib\liblega-c-elf.a
 END GROUP
 OUTPUT(dist/default/production/Carte_moteur_Mirrione.X.production.elf elf32-pic30)
-LOAD /CW/_FGS ú
+LOAD /CW/_FGS´
+
 LOAD default_isr
 LOAD data_init
 
@@ -2392,7 +2394,7 @@ __c30_signature
  .ivt._T1Interrupt
                   0x00001a          0x2 build/default/production/timer.o
 
-.text             0x00055a        0x24a
+.text             0x00055a        0x282
  .text            0x00055a        0x10e build/default/production/toolbox.o
                   0x00055a                  _Abs
                   0x000586                  _Max
@@ -2400,18 +2402,18 @@ __c30_signature
                   0x0005e6                  _LimitToInterval
                   0x000638                  _RadianToDegree
                   0x000650                  _DegreeToRadian
- .text            0x000668         0x60 build/default/production/pwm.o
+ .text            0x000668         0x9a build/default/production/pwm.o
                   0x000668                  _InitPWM
                   0x0006a0                  _PWMSetSpeed
- .text            0x0006c8         0x56 build/default/production/ChipConfig.o
-                  0x0006c8                  _InitOscillator
- .text            0x00071e         0x4e build/default/production/timer.o
-                  0x00071e                  _InitTimer23
-                  0x000750                  _InitTimer1
- .text            0x00076c         0x1e build/default/production/IO.o
-                  0x00076c                  _InitIO
- .text            0x00078a         0x1a build/default/production/main.o
-                  0x00078a                  _main
+ .text            0x000702         0x56 build/default/production/ChipConfig.o
+                  0x000702                  _InitOscillator
+ .text            0x000758         0x4e build/default/production/timer.o
+                  0x000758                  _InitTimer23
+                  0x00078a                  _InitTimer1
+ .text            0x0007a6         0x1e build/default/production/IO.o
+                  0x0007a6                  _InitIO
+ .text            0x0007c4         0x18 build/default/production/main.o
+                  0x0007c4                  _main
 
-.dinit            0x0007a4         0x10
- .dinit           0x0007a4         0x10 data_init
+.dinit            0x0007dc         0x10
+ .dinit           0x0007dc         0x10 data_init
