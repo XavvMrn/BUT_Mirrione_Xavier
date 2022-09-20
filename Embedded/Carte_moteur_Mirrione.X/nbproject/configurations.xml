@@ -9,6 +9,7 @@
       <itemPath>timer.h</itemPath>
       <itemPath>robot.h</itemPath>
       <itemPath>toolbox.h</itemPath>
+      <itemPath>pwm.h</itemPath>
     </logicalFolder>
     <logicalFolder name="LinkerScript"
                    displayName="Linker Files"
@@ -23,6 +24,7 @@
       <itemPath>timer.c</itemPath>
       <itemPath>robot.c</itemPath>
       <itemPath>toolbox.c</itemPath>
+      <itemPath>pwm.c</itemPath>
     </logicalFolder>
     <logicalFolder name="ExternalFiles"
                    displayName="Important Files"
