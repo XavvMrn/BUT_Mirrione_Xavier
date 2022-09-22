@@ -50,7 +50,8 @@ void InitIO()
     
     _TRISB14 = 0;
     _TRISB15 = 0;
-    
+    _TRISC6 = 0; //C6 et C7 moteur droit 
+    _TRISC7 = 0;
 
     //********** Configuration des entrées : _TRISxx = 1 ********************************   
 

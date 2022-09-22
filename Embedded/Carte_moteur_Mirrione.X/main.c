@@ -1,10 +1,9 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <xc.h>
-#include "ChipConfig.h"
+//Partie PWM
+#include <xc.h> // library xc.h inclut tous les uC
 #include "IO.h"
-#include "timer.h"
-#include "pwm.h"
+#include "PWM.h"
+#include "Robot.h"
+#include "toolbox.h"
 
 int main(void) {
     /***************************************************************************************************/
@@ -20,8 +19,8 @@ int main(void) {
     InitTimer23();
     InitTimer1();
     InitPWM();
-    
-    PWMSetSpeed(0);
+            
+    PWMSetSpeed(20,0);
     
     
     LED_BLANCHE = 1;
