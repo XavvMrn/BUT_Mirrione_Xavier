@@ -6,6 +6,7 @@
 #include "PWM.h"
 #include "Robot.h"
 #include "toolbox.h"
+#include "adc.h"
 
 int main(void) {
     /***************************************************************************************************/
@@ -21,7 +22,10 @@ int main(void) {
     InitTimer23();
     InitTimer1();
     InitPWM();
-        
+    InitADC1();   
+    
+    
+    
     LED_BLANCHE = 1;
     LED_BLEUE = 1;
     LED_ORANGE = 1;

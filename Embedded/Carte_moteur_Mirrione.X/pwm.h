@@ -15,7 +15,6 @@ void InitPWM(void);
 
 void PWMUpdateSpeed();
 //void PWMSetSpeed(float vitesseEnPourcents, int moteur);
-
 void PWMSetSpeedConsigne(float vitesseEnPourcents, char moteur);
 
 #endif	/* PWM_H */
