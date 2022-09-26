@@ -7,7 +7,7 @@
 #include "adc.h"
 
 #define PWMPER 40.0
-unsigned char acceleration = 0;
+unsigned char acceleration = 1;
 
 void InitPWM(void)
 {
