@@ -8,7 +8,7 @@
 #include "main.h"
 
 #define PWMPER 40.0
-unsigned char acceleration = 25;
+unsigned char acceleration = 15;
 
 void InitPWM(void)
 {
