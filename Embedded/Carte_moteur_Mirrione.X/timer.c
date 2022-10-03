@@ -31,16 +31,16 @@ void InitTimer23(void) {
 
 void __attribute__((interrupt, no_auto_psv)) _T3Interrupt(void) {
     IFS0bits.T3IF = 0; // Clear Timer3 Interrupt Flag
-    LED_ORANGE = !LED_ORANGE;
-    if (toggle == 0) {
-        PWMSetSpeedConsigne(20, MOTEUR_DROIT);
-        PWMSetSpeedConsigne(20, MOTEUR_GAUCHE);
-        toggle = 1;
-    } else {
-        PWMSetSpeedConsigne(-20, MOTEUR_DROIT);
-        PWMSetSpeedConsigne(-20, MOTEUR_GAUCHE);
-        toggle = 0;
-    }
+//    LED_ORANGE = !LED_ORANGE;
+//    if (toggle == 0) {
+//        PWMSetSpeedConsigne(20, MOTEUR_DROIT);
+//        PWMSetSpeedConsigne(20, MOTEUR_GAUCHE);
+//        toggle = 1;
+//    } else {
+//        PWMSetSpeedConsigne(-20, MOTEUR_DROIT);
+//        PWMSetSpeedConsigne(-20, MOTEUR_GAUCHE);
+//        toggle = 0;
+//    }
 }
 
 
@@ -95,6 +95,7 @@ void __attribute__((interrupt, no_auto_psv)) _T4Interrupt(void) {
     {
     IFS1bits.T4IF = 0;
     timestamp++; // permettant d'incrémenter de 1 la variable timestamp à chaque ms, ça compte les ms en gros
+    OperatingSystemLoop();
     }
 }
     
