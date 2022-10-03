@@ -83,7 +83,7 @@ case STATE_ATTENTE_EN_COURS:
         break;
 
         case STATE_TOURNE_GAUCHE:
-            PWMSetSpeedConsigne(30, MOTEUR_DROIT);
+            PWMSetSpeedConsigne(10, MOTEUR_DROIT);
             PWMSetSpeedConsigne(0, MOTEUR_GAUCHE);
             stateRobot = STATE_TOURNE_GAUCHE_EN_COURS;
         break;
@@ -93,7 +93,7 @@ case STATE_ATTENTE_EN_COURS:
 
         case STATE_TOURNE_DROITE:
             PWMSetSpeedConsigne(0, MOTEUR_DROIT);
-            PWMSetSpeedConsigne(30, MOTEUR_GAUCHE);
+            PWMSetSpeedConsigne(10, MOTEUR_GAUCHE);
             stateRobot = STATE_TOURNE_DROITE_EN_COURS;
         break;
         case STATE_TOURNE_DROITE_EN_COURS:
