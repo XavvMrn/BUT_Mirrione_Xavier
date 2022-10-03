@@ -5,6 +5,7 @@
 #include "robot.h"
 #include "toolbox.h"
 #include "adc.h"
+#include "main.h"
 
 #define PWMPER 40.0
 unsigned char acceleration = 0;

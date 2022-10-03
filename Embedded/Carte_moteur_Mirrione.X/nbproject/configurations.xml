@@ -11,6 +11,7 @@
       <itemPath>toolbox.h</itemPath>
       <itemPath>pwm.h</itemPath>
       <itemPath>adc.h</itemPath>
+      <itemPath>main.h</itemPath>
     </logicalFolder>
     <logicalFolder name="LinkerScript"
                    displayName="Linker Files"
