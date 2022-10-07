@@ -8,7 +8,6 @@
 #ifndef OS_H
 #define	OS_H
 
-void TelemetreForMoteur(void);
 void OperatingSystemLoop(void);
 void SetNextRobotStateInAutomaticMode(void);
 //unsigned char AcquireTelemetreVerite(void);
