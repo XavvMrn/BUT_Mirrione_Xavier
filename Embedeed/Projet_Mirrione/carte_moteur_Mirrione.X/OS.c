@@ -190,8 +190,8 @@ void OperatingSystemLoop(void) {
             break;
             
         case STATE_180:
-            PWMSetSpeedConsigne(25, MOTEUR_DROIT);
-            PWMSetSpeedConsigne(-25, MOTEUR_GAUCHE);
+            PWMSetSpeedConsigne(15, MOTEUR_DROIT);
+            PWMSetSpeedConsigne(-15, MOTEUR_GAUCHE);
             startingActionTimestamp = timestamp;
             stateRobot = STATE_180_EN_COURS;
             break;
@@ -223,18 +223,18 @@ void SetNextRobotStateInAutomaticMode() {
     } else if (robotState.distanceTelemetreDroit < 20) {
         //Recule par la gauche
         nextStateRobot = STATE_RECULE_PAR_GAUCHE;
-    } else if (robotState.distanceTelemetreDroit < 35 &&
+    } else if (robotState.distanceTelemetreDroit < 40 &&
             robotState.distanceTelemetreGauche > 20 &&
             robotState.distanceTelemetreCentre > 20) {
         //Tourne a droite car aucun obstacle(main)
         nextStateRobot = STATE_TOURNE_GAUCHE;
-    } else if (robotState.distanceTelemetreGauche < 35 &&
+    } else if (robotState.distanceTelemetreGauche < 40 &&
             robotState.distanceTelemetreDroit > 20 &&
             robotState.distanceTelemetreCentre > 20) {
         //Tourne a gauche car aucun obstacle (main)
         nextStateRobot = STATE_TOURNE_DROITE;
         //Tourne un peu vers la gauche
-    } else if (robotState.distanceTelemetreCentre < 35 &&
+    } else if (robotState.distanceTelemetreCentre < 40 &&
             robotState.distanceTelemetreDroit > 20 &&
             robotState.distanceTelemetreGauche > 20) {
         if (robotState.distanceTelemetreDroit > robotState.distanceTelemetreGauche) {
@@ -243,7 +243,7 @@ void SetNextRobotStateInAutomaticMode() {
             nextStateRobot = STATE_TOURNE_BCP_DROITE;
         }
     }
-    else if(robotState.distanceTelemetreCentre < 35){
+    else if(robotState.distanceTelemetreCentre < 40){
         if (robotState.distanceTelemetreDroit > robotState.distanceTelemetreGauche) {
             nextStateRobot = STATE_TOURNE_SUR_PLACE_DROITE;
         } else {
