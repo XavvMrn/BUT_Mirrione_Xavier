@@ -50,15 +50,23 @@ int main(void) {
 
             if (robotState.distanceTelemetreDroit2< 30){
                 LED_ORANGE = 1;
-            } else {
+            } 
+            else if (robotState.distanceTelemetreDroit< 30){
+                LED_ORANGE = 1;
+            }else {
                 LED_ORANGE = 0;
             }
+            
             if (robotState.distanceTelemetreCentre < 30) {
                 LED_BLEUE = 1;
             } else {
                 LED_BLEUE = 0;
             }
+            
             if (robotState.distanceTelemetreGauche2< 30) {
+                LED_BLANCHE = 1; 
+            }
+            else if (robotState.distanceTelemetreGauche< 30) {
                 LED_BLANCHE = 1;
             } else {
                 LED_BLANCHE = 0;

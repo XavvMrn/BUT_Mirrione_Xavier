@@ -117,7 +117,7 @@ void OperatingSystemLoop(void) {
             SetNextRobotStateInAutomaticMode();
             break;
             
-            
+           
         case STATE_RECULE_PAR_GAUCHE:
             PWMSetSpeedConsigne(0, MOTEUR_DROIT);
             PWMSetSpeedConsigne(-30, MOTEUR_GAUCHE);
@@ -134,34 +134,17 @@ void OperatingSystemLoop(void) {
         case STATE_RECULE_PAR_DROITE_EN_COURS:
             SetNextRobotStateInAutomaticMode();
             break;
-            
-            
-        case STATE_RECULE_UN_PEU_DROITE:
-            PWMSetSpeedConsigne(-15, MOTEUR_DROIT);
-            PWMSetSpeedConsigne(0, MOTEUR_GAUCHE);
-            stateRobot = STATE_RECULE_PAR_DROITE_EN_COURS;
-            break;
-        case STATE_RECULE_UN_PEU_DROITE_EN_COURS:
-            SetNextRobotStateInAutomaticMode();
-            break;
-        case STATE_RECULE_UN_PEU_GAUCHE:
-            PWMSetSpeedConsigne(0, MOTEUR_DROIT);
-            PWMSetSpeedConsigne(-15, MOTEUR_GAUCHE);
-            stateRobot = STATE_RECULE_UN_PEU_GAUCHE_EN_COURS;
-            break;
-        case STATE_RECULE_UN_PEU_GAUCHE_EN_COURS:
-            SetNextRobotStateInAutomaticMode();
-            break;
+           
         case STATE_TOURNE_UN_PEU_GAUCHE:
             PWMSetSpeedConsigne(25, MOTEUR_DROIT);
-            PWMSetSpeedConsigne(22, MOTEUR_GAUCHE);
+            PWMSetSpeedConsigne(12, MOTEUR_GAUCHE);
             stateRobot = STATE_TOURNE_UN_PEU_GAUCHE_EN_COURS;
             break;
         case STATE_TOURNE_UN_PEU_GAUCHE_EN_COURS:
             SetNextRobotStateInAutomaticMode();
             break;
         case STATE_TOURNE_UN_PEU_DROITE:
-            PWMSetSpeedConsigne(22, MOTEUR_DROIT);
+            PWMSetSpeedConsigne(12, MOTEUR_DROIT);
             PWMSetSpeedConsigne(25, MOTEUR_GAUCHE);
             stateRobot = STATE_TOURNE_UN_PEU_DROITE_EN_COURS;
             break;
@@ -169,7 +152,6 @@ void OperatingSystemLoop(void) {
             SetNextRobotStateInAutomaticMode();
             break;
        
-
             
         case STATE_TOURNE_BCP_DROITE:
             PWMSetSpeedConsigne(0, MOTEUR_DROIT);
@@ -215,26 +197,29 @@ unsigned char nextStateRobot = 0;
 void SetNextRobotStateInAutomaticMode() {
 
     //Détermination de la position des obstacles en fonction des télémètres
-    if (robotState.distanceTelemetreCentre < 20) {
+    if (robotState.distanceTelemetreCentre < 15) {
         nextStateRobot = STATE_180;
-    } else if (robotState.distanceTelemetreGauche < 20) {
+    } 
+    else if (robotState.distanceTelemetreGauche < 25) {
         //Recule par la droite
         nextStateRobot = STATE_RECULE_PAR_DROITE;
-    } else if (robotState.distanceTelemetreDroit < 20) {
+    } else if (robotState.distanceTelemetreDroit < 25) {
         //Recule par la gauche
-        nextStateRobot = STATE_RECULE_PAR_GAUCHE;
-    } else if (robotState.distanceTelemetreDroit < 40 &&
+        nextStateRobot = STATE_RECULE_PAR_GAUCHE; 
+    } 
+    else if (robotState.distanceTelemetreDroit < 30 &&
             robotState.distanceTelemetreGauche > 20 &&
             robotState.distanceTelemetreCentre > 20) {
         //Tourne a droite car aucun obstacle(main)
         nextStateRobot = STATE_TOURNE_GAUCHE;
-    } else if (robotState.distanceTelemetreGauche < 40 &&
+    } else if (robotState.distanceTelemetreGauche < 30 &&
             robotState.distanceTelemetreDroit > 20 &&
             robotState.distanceTelemetreCentre > 20) {
         //Tourne a gauche car aucun obstacle (main)
         nextStateRobot = STATE_TOURNE_DROITE;
         //Tourne un peu vers la gauche
-    } else if (robotState.distanceTelemetreCentre < 40 &&
+        
+    } else if (robotState.distanceTelemetreCentre < 35 &&
             robotState.distanceTelemetreDroit > 20 &&
             robotState.distanceTelemetreGauche > 20) {
         if (robotState.distanceTelemetreDroit > robotState.distanceTelemetreGauche) {
@@ -243,7 +228,17 @@ void SetNextRobotStateInAutomaticMode() {
             nextStateRobot = STATE_TOURNE_BCP_DROITE;
         }
     }
-    else if(robotState.distanceTelemetreCentre < 40){
+    else if (robotState.distanceTelemetreGauche2 > 30 &&
+            robotState.distanceTelemetreDroit2 < 35 ) {
+            nextStateRobot = STATE_TOURNE_UN_PEU_GAUCHE;
+        } 
+    else if (robotState.distanceTelemetreDroit2 > 30 &&
+            robotState.distanceTelemetreGauche2 < 35 ) {
+            nextStateRobot = STATE_TOURNE_UN_PEU_DROITE;
+        }
+    
+    
+    else if(robotState.distanceTelemetreCentre < 35){
         if (robotState.distanceTelemetreDroit > robotState.distanceTelemetreGauche) {
             nextStateRobot = STATE_TOURNE_SUR_PLACE_DROITE;
         } else {
@@ -261,5 +256,4 @@ void SetNextRobotStateInAutomaticMode() {
         stateRobot = nextStateRobot;
     }
 }
-
 
