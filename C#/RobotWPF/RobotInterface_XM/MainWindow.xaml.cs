@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
+
 namespace RobotInterface_XM
 {
     /// <summary>
@@ -20,10 +21,26 @@ namespace RobotInterface_XM
     /// </summary>
     public partial class MainWindow : Window
     {
+        ReliableSerialPort serialPort1;
+        DispatcherTimer timerAffichage;
+        string receivedText;
+
         public MainWindow()
         {
             InitializeComponent();
-        }
+            timerAffichage = new DispatcherTimer();
+            timerAffichage.Interval = new TimeSpan(0, 0, 0, 0, 100);
+            timerAffichage.Tick += TimerAffichage_Tick;
+            timerAffichage.Start();
+
+            serialPort1 = new ReliableSerialPort("COM3", 115200, Parity.None, 8, StopBits.One);
+            serialPort1.DataReceived += SerialPort1_DataReceived;
+            serialPort1.Open();
+            }
+
+        //if (robot.receivedText != "")
+        //    textBoxReception.Text += robot.receivedText;
+        //robot.receivedText = "";
 
         bool toggle = false;
         private void ButtonEnvoyer_Click(object sender, RoutedEventArgs e)
@@ -44,7 +61,7 @@ namespace RobotInterface_XM
         {
             // Envoie msg Emiss° à Recept°
             string selectxt = textBoxEnvoi.Text;
-            textBoxReception.Text = "Recu :" + selectxt;
+            textBoxReception.Text = "Recu : " + selectxt;
             textBoxEnvoi.Text = "";
         }
 
@@ -55,5 +72,11 @@ namespace RobotInterface_XM
                 SendMessage();
             }
         }
+
+        public void SerialPort1_DataReceived(object sender, DataReceivedArgs e)
+        {
+            textBoxReception.Text += Encoding.UTF8.GetString(e.Data, 0, e.Data.Length);
+        }
+
     }
 }
