@@ -60,7 +60,6 @@ namespace RobotInterface_XM
             robot.receivedText += Encoding.UTF8.GetString(e.Data, 0, e.Data.Length);
 
             //throw new NotImplementedException();
-
         }
 
 
