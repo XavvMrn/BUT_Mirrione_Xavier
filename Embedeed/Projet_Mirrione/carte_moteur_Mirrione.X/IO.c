@@ -62,5 +62,9 @@ void InitIO()
     //********** Configuration des entrées : _TRISxx = 1 ********************************   
 
     
+    
+    // RX TX 
+    _U1RXR = 24 ; //Remappe l a RP . . . sur l?éentre Rx1
+    _RP36R = 0b00001 ; //Remappe l a sortie Tx1 vers RP . . .
 
 }

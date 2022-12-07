@@ -8,6 +8,7 @@
 #include "ADC.h"
 #include "Robot.h"
 #include "OS.h"
+#include "UART.h"
 
 unsigned int *result;
 
@@ -22,14 +23,11 @@ int main(void) {
 
     InitPWM();
     InitADC1();
-
+    InitUART();
 
     LED_BLANCHE = 1;
     LED_BLEUE = 1;
     LED_ORANGE = 1;
-    
-    //AcquireTelemetreVerite();
-    //PWMSetSpeed(20,MOTEUR_DROITE);
 
     while (1) {
 
@@ -48,29 +46,32 @@ int main(void) {
             robotState.distanceTelemetreDroit2 = 34 / volts - 5;
 
 
-            if (robotState.distanceTelemetreDroit2< 30){
+            if (robotState.distanceTelemetreDroit2 < 30) {
                 LED_ORANGE = 1;
-            } 
-            else if (robotState.distanceTelemetreDroit< 30){
+            }
+            else if (robotState.distanceTelemetreDroit < 30) {
                 LED_ORANGE = 1;
-            }else {
+            } else {
                 LED_ORANGE = 0;
             }
-            
+
             if (robotState.distanceTelemetreCentre < 30) {
                 LED_BLEUE = 1;
             } else {
                 LED_BLEUE = 0;
             }
-            
-            if (robotState.distanceTelemetreGauche2< 30) {
-                LED_BLANCHE = 1; 
-            }
-            else if (robotState.distanceTelemetreGauche< 30) {
+
+            if (robotState.distanceTelemetreGauche2 < 30) {
+                LED_BLANCHE = 1;
+            } else if (robotState.distanceTelemetreGauche < 30) {
                 LED_BLANCHE = 1;
             } else {
                 LED_BLANCHE = 0;
             }
+
+//            SendMessageDirect((unsigned char*) "DAC", 3);
+//            __delay32(40000000);
+
         }
-      }
+    }
 }
