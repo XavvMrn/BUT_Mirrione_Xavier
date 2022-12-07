@@ -45,21 +45,27 @@ namespace RobotInterface_XM
 
         private void TimerAffichage_Tick(object sender, EventArgs e)
         {
-            //throw new NotImplementedException();
-
-            if (robot.receivedText != "")
+            /*if (robot.receivedText != "")
             {
                 textBoxReception.Text += robot.receivedText;
                 robot.receivedText = "";
+            }*/
+            while (robot.byteListReceived.Count>0)
+            {
+                var c = robot.byteListReceived.Dequeue();
+                textBoxReception.Text += "0x" + c.ToString("X2") + " ";
             }
                        
         }
 
         private void SerialPort1_DataReceived(object sender, DataReceivedArgs e)
         {
-            robot.receivedText += Encoding.UTF8.GetString(e.Data, 0, e.Data.Length);
+            //robot.receivedText += Encoding.UTF8.GetString(e.Data, 0, e.Data.Length);
 
-            //throw new NotImplementedException();
+            foreach (var lastw in e.Data)
+            {
+                robot.byteListReceived.Enqueue(lastw);
+            }
         }
 
 
