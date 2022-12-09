@@ -15,6 +15,7 @@
       <itemPath>OS.h</itemPath>
       <itemPath>UART.h</itemPath>
       <itemPath>cb_tx1.h</itemPath>
+      <itemPath>cb_rx1.h</itemPath>
     </logicalFolder>
     <logicalFolder name="LinkerScript"
                    displayName="Linker Files"
@@ -34,6 +35,7 @@
       <itemPath>OS.c</itemPath>
       <itemPath>UART.c</itemPath>
       <itemPath>cb_tx1.c</itemPath>
+      <itemPath>cb_rx1.c</itemPath>
     </logicalFolder>
     <logicalFolder name="ExternalFiles"
                    displayName="Important Files"

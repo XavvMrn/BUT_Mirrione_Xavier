@@ -49,8 +49,7 @@ int main(void) {
 
             if (robotState.distanceTelemetreDroit2 < 30) {
                 LED_ORANGE = 1;
-            }
-            else if (robotState.distanceTelemetreDroit < 30) {
+            } else if (robotState.distanceTelemetreDroit < 30) {
                 LED_ORANGE = 1;
             } else {
                 LED_ORANGE = 0;
@@ -69,10 +68,10 @@ int main(void) {
             } else {
                 LED_BLANCHE = 0;
             }
-            
-            SendMessage("Bonjour",7);
-//            SendMessageDirect((unsigned char*) "DAC", 3);
-//            __delay32(40000000);
+
+            SendMessage("Bonjour", 7);
+            //            SendMessageDirect((unsigned char*) "DAC", 3);
+            //            __delay32(40000000);
 
         }
     }

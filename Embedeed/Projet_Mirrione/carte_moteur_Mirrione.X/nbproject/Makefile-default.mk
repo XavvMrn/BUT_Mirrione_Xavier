@@ -57,17 +57,17 @@ OBJECTDIR=build/${CND_CONF}/${IMAGE_TYPE}
 DISTDIR=dist/${CND_CONF}/${IMAGE_TYPE}
 
 # Source Files Quoted if spaced
-SOURCEFILES_QUOTED_IF_SPACED=main.c ChipConfig.c IO.c timer.c ToolBox.c PWM.c Robot.c ADC.c OS.c UART.c cb_tx1.c
+SOURCEFILES_QUOTED_IF_SPACED=main.c ChipConfig.c IO.c timer.c ToolBox.c PWM.c Robot.c ADC.c OS.c UART.c cb_tx1.c cb_rx1.c
 
 # Object Files Quoted if spaced
-OBJECTFILES_QUOTED_IF_SPACED=${OBJECTDIR}/main.o ${OBJECTDIR}/ChipConfig.o ${OBJECTDIR}/IO.o ${OBJECTDIR}/timer.o ${OBJECTDIR}/ToolBox.o ${OBJECTDIR}/PWM.o ${OBJECTDIR}/Robot.o ${OBJECTDIR}/ADC.o ${OBJECTDIR}/OS.o ${OBJECTDIR}/UART.o ${OBJECTDIR}/cb_tx1.o
-POSSIBLE_DEPFILES=${OBJECTDIR}/main.o.d ${OBJECTDIR}/ChipConfig.o.d ${OBJECTDIR}/IO.o.d ${OBJECTDIR}/timer.o.d ${OBJECTDIR}/ToolBox.o.d ${OBJECTDIR}/PWM.o.d ${OBJECTDIR}/Robot.o.d ${OBJECTDIR}/ADC.o.d ${OBJECTDIR}/OS.o.d ${OBJECTDIR}/UART.o.d ${OBJECTDIR}/cb_tx1.o.d
+OBJECTFILES_QUOTED_IF_SPACED=${OBJECTDIR}/main.o ${OBJECTDIR}/ChipConfig.o ${OBJECTDIR}/IO.o ${OBJECTDIR}/timer.o ${OBJECTDIR}/ToolBox.o ${OBJECTDIR}/PWM.o ${OBJECTDIR}/Robot.o ${OBJECTDIR}/ADC.o ${OBJECTDIR}/OS.o ${OBJECTDIR}/UART.o ${OBJECTDIR}/cb_tx1.o ${OBJECTDIR}/cb_rx1.o
+POSSIBLE_DEPFILES=${OBJECTDIR}/main.o.d ${OBJECTDIR}/ChipConfig.o.d ${OBJECTDIR}/IO.o.d ${OBJECTDIR}/timer.o.d ${OBJECTDIR}/ToolBox.o.d ${OBJECTDIR}/PWM.o.d ${OBJECTDIR}/Robot.o.d ${OBJECTDIR}/ADC.o.d ${OBJECTDIR}/OS.o.d ${OBJECTDIR}/UART.o.d ${OBJECTDIR}/cb_tx1.o.d ${OBJECTDIR}/cb_rx1.o.d
 
 # Object Files
-OBJECTFILES=${OBJECTDIR}/main.o ${OBJECTDIR}/ChipConfig.o ${OBJECTDIR}/IO.o ${OBJECTDIR}/timer.o ${OBJECTDIR}/ToolBox.o ${OBJECTDIR}/PWM.o ${OBJECTDIR}/Robot.o ${OBJECTDIR}/ADC.o ${OBJECTDIR}/OS.o ${OBJECTDIR}/UART.o ${OBJECTDIR}/cb_tx1.o
+OBJECTFILES=${OBJECTDIR}/main.o ${OBJECTDIR}/ChipConfig.o ${OBJECTDIR}/IO.o ${OBJECTDIR}/timer.o ${OBJECTDIR}/ToolBox.o ${OBJECTDIR}/PWM.o ${OBJECTDIR}/Robot.o ${OBJECTDIR}/ADC.o ${OBJECTDIR}/OS.o ${OBJECTDIR}/UART.o ${OBJECTDIR}/cb_tx1.o ${OBJECTDIR}/cb_rx1.o
 
 # Source Files
-SOURCEFILES=main.c ChipConfig.c IO.c timer.c ToolBox.c PWM.c Robot.c ADC.c OS.c UART.c cb_tx1.c
+SOURCEFILES=main.c ChipConfig.c IO.c timer.c ToolBox.c PWM.c Robot.c ADC.c OS.c UART.c cb_tx1.c cb_rx1.c
 
 
 
@@ -161,6 +161,12 @@ ${OBJECTDIR}/cb_tx1.o: cb_tx1.c  .generated_files/flags/default/e89c71abaecda4c8
 	@${RM} ${OBJECTDIR}/cb_tx1.o 
 	${MP_CC} $(MP_EXTRA_CC_PRE)  cb_tx1.c  -o ${OBJECTDIR}/cb_tx1.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MP -MMD -MF "${OBJECTDIR}/cb_tx1.o.d"      -g -D__DEBUG -D__MPLAB_DEBUGGER_ICD4=1  -mno-eds-warn  -omf=elf -DXPRJ_default=$(CND_CONF)  -legacy-libc  $(COMPARISON_BUILD)  -O0 -msmart-io=1 -Wall -msfr-warn=off    -mdfp="${DFP_DIR}/xc16"
 	
+${OBJECTDIR}/cb_rx1.o: cb_rx1.c  .generated_files/flags/default/364362c5bb7924bb94a4011809c35b7d51881ca8 .generated_files/flags/default/168b633b52a46c5b8b8a05feadf3c077d6e15a18
+	@${MKDIR} "${OBJECTDIR}" 
+	@${RM} ${OBJECTDIR}/cb_rx1.o.d 
+	@${RM} ${OBJECTDIR}/cb_rx1.o 
+	${MP_CC} $(MP_EXTRA_CC_PRE)  cb_rx1.c  -o ${OBJECTDIR}/cb_rx1.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MP -MMD -MF "${OBJECTDIR}/cb_rx1.o.d"      -g -D__DEBUG -D__MPLAB_DEBUGGER_ICD4=1  -mno-eds-warn  -omf=elf -DXPRJ_default=$(CND_CONF)  -legacy-libc  $(COMPARISON_BUILD)  -O0 -msmart-io=1 -Wall -msfr-warn=off    -mdfp="${DFP_DIR}/xc16"
+	
 else
 ${OBJECTDIR}/main.o: main.c  .generated_files/flags/default/bc50b1ff478ae88fe0612187c54bc8887daa1ed7 .generated_files/flags/default/168b633b52a46c5b8b8a05feadf3c077d6e15a18
 	@${MKDIR} "${OBJECTDIR}" 
@@ -227,6 +233,12 @@ ${OBJECTDIR}/cb_tx1.o: cb_tx1.c  .generated_files/flags/default/8596583d65fc97ec
 	@${RM} ${OBJECTDIR}/cb_tx1.o.d 
 	@${RM} ${OBJECTDIR}/cb_tx1.o 
 	${MP_CC} $(MP_EXTRA_CC_PRE)  cb_tx1.c  -o ${OBJECTDIR}/cb_tx1.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MP -MMD -MF "${OBJECTDIR}/cb_tx1.o.d"      -mno-eds-warn  -g -omf=elf -DXPRJ_default=$(CND_CONF)  -legacy-libc  $(COMPARISON_BUILD)  -O0 -msmart-io=1 -Wall -msfr-warn=off    -mdfp="${DFP_DIR}/xc16"
+	
+${OBJECTDIR}/cb_rx1.o: cb_rx1.c  .generated_files/flags/default/35abc21f7fc40644b30750e0ab5eb05ee5732512 .generated_files/flags/default/168b633b52a46c5b8b8a05feadf3c077d6e15a18
+	@${MKDIR} "${OBJECTDIR}" 
+	@${RM} ${OBJECTDIR}/cb_rx1.o.d 
+	@${RM} ${OBJECTDIR}/cb_rx1.o 
+	${MP_CC} $(MP_EXTRA_CC_PRE)  cb_rx1.c  -o ${OBJECTDIR}/cb_rx1.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MP -MMD -MF "${OBJECTDIR}/cb_rx1.o.d"      -mno-eds-warn  -g -omf=elf -DXPRJ_default=$(CND_CONF)  -legacy-libc  $(COMPARISON_BUILD)  -O0 -msmart-io=1 -Wall -msfr-warn=off    -mdfp="${DFP_DIR}/xc16"
 	
 endif
 
