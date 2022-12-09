@@ -9,6 +9,8 @@
 #include "Robot.h"
 #include "OS.h"
 #include "UART.h"
+#include "cb_tx1.h"
+#include "cb_rx1.h"
 
 unsigned int *result;
 
@@ -24,7 +26,6 @@ int main(void) {
     InitPWM();
     InitADC1();
     InitUART();
-
     LED_BLANCHE = 1;
     LED_BLEUE = 1;
     LED_ORANGE = 1;
@@ -68,7 +69,8 @@ int main(void) {
             } else {
                 LED_BLANCHE = 0;
             }
-
+            
+            SendMessage("Bonjour",7);
 //            SendMessageDirect((unsigned char*) "DAC", 3);
 //            __delay32(40000000);
 

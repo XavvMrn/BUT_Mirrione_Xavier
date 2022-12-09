@@ -1,6 +1,7 @@
 #include <xc.h>
 #include "UART.h"
 #include "ChipConfig.h""
+#include "cb_rx1.h"
 
 #define BAUDRATE 115200
 #define BRGVAL ((FCY/BAUDRATE)/4)-1
