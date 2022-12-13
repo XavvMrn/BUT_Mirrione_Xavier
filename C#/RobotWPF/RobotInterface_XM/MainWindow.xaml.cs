@@ -50,12 +50,12 @@ namespace RobotInterface_XM
                 textBoxReception.Text += robot.receivedText;
                 robot.receivedText = "";
             }*/
-            while (robot.byteListReceived.Count>0)
+            while (robot.byteListReceived.Count > 0)
             {
                 var c = robot.byteListReceived.Dequeue();
                 textBoxReception.Text += "0x" + c.ToString("X2") + " ";
             }
-                       
+
         }
 
         private void SerialPort1_DataReceived(object sender, DataReceivedArgs e)
@@ -94,8 +94,8 @@ namespace RobotInterface_XM
 
         private void textBoxEnvoi_KeyUp(object sender, KeyEventArgs e)
         {
-            if(e.Key == Key.Enter)
-            {                
+            if (e.Key == Key.Enter)
+            {
                 SendMessage();
             }
         }
@@ -108,13 +108,47 @@ namespace RobotInterface_XM
         private void ButtonTest_Click(object sender, RoutedEventArgs e)
         {
             byte[] byteList = new byte[20];
-            for(int i = 0; i<20; i++)
+            for (int i = 0; i < 20; i++)
             {
                 byteList[i] = (byte)(2 * i);
             }
             serialPort1.Write(byteList, 0, 20);
         }
 
+        byte CalculateChecksum(int msgFunction, int msgPayloadLength, byte[] msgPayload)
+        {
+            byte checksum = 0;
+            checksum ^= 0xFE;   // SOF du formatage
+            checksum ^= (byte)(msgFunction >> 8); // >> 8 étant un décalage de 8 bits 
+            checksum ^= (byte)(msgFunction >> 0); // pour homogéniser
+            checksum ^= (byte)(msgPayloadLength >> 8);
+            checksum ^= (byte)(msgPayloadLength >> 0);
+            for (int i = 0; i < msgPayloadLength; i++)
+            {
+                checksum ^= msgPayload[i];
+            }
+            return checksum;
+        }
+        void UartEncodeAndSendMessage(int msgFunction, int msgPayloadLength, byte[] msgPayload)
+        {
+            byte[] message = new byte[msgPayloadLength + 6];
+            int pos = 0;
+            message[pos++] = 0xFE;
+            message[pos++] = (byte)(msgFunction >> 8);
+            message[pos++] = (byte)(msgFunction >> 0);
+            message[pos++] = (byte)(msgPayloadLength >> 8);
+            message[pos++] = (byte)(msgPayloadLength >> 0);
+
+            for (int i = 0; i < msgPayloadLength; i++)
+            {
+                message[pos++] = msgPayload[i];
+            }
+            message[pos++] = CalculateChecksum(msgFunction, msgPayloadLength, msgPayload);
+            serialPort1.Write(message, 0, pos);
+
+        }
 
     }
 }
+
+

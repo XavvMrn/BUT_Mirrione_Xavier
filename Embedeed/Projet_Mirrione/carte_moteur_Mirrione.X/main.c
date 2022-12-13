@@ -1,3 +1,5 @@
+#include <libpic30.h>
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <xc.h>
@@ -31,6 +33,14 @@ int main(void) {
     LED_ORANGE = 1;
 
     while (1) {
+
+
+        int i;
+        for (i = 0; i < CB_RX1_GetDataSize(); i++) {
+            unsigned char c = CB_RX1_Get();
+            SendMessage(&c, 1);
+        }
+        __delay32(10000);
 
         if (ADCIsConversionFinished() == 1) {
             ADCClearConversionFinishedFlag();
@@ -69,7 +79,8 @@ int main(void) {
                 LED_BLANCHE = 0;
             }
 
-            SendMessage("Bonjour", 7);
+
+            //SendMessage("Bonjour", 7);
             //            SendMessageDirect((unsigned char*) "DAC", 3);
             //            __delay32(40000000);
 

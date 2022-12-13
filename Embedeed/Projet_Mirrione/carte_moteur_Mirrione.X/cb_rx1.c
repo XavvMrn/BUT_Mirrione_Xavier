@@ -14,15 +14,17 @@ unsigned char cbRx1Buffer[CBRX1_BUFFER_SIZE];
 void CB_RX1_Add(unsigned char value) {
     if (CB_RX1_GetRemainingSize() > 0) {
         cbRx1Buffer[cbRx1Head] = value;
-        cbRx1Buffer++;
-        if (cbRx1Head > CBRX1_BUFFER_SIZE) cbRx1Head = 0;
+        cbRx1Head++;
+        if (cbRx1Head > CBRX1_BUFFER_SIZE)
+            cbRx1Head = 0;
     }
 }
 
 unsigned char CB_RX1_Get(void) {
     unsigned char value = cbRx1Buffer[cbRx1Tail];
     cbRx1Tail++;
-    if (cbRx1Tail > CBRX1_BUFFER_SIZE) cbRx1Tail = 0;
+    if (cbRx1Tail > CBRX1_BUFFER_SIZE)
+        cbRx1Tail = 0;
     return value;
 }
 
@@ -50,13 +52,14 @@ void __attribute__((interrupt, no_auto_psv)) _U1RXInterrupt(void) {
 }
 
 int CB_RX1_GetRemainingSize(void) {
-    int rSizeRecep;
-    //?
-    return rSizeRecep;
+    return CBRX1_BUFFER_SIZE - CB_RX1_GetDataSize();
 }
 
 int CB_RX1_GetDataSize(void) {
-    int rSizeRecep;
-    //?
-    return rSizeRecep;
+    int dataSize;
+    if (cbRx1Head >= cbRx1Tail)
+        dataSize = cbRx1Head - cbRx1Tail;
+    else
+        dataSize = CBRX1_BUFFER_SIZE - (cbRx1Tail - cbRx1Head);
+    return dataSize;
 }

@@ -1,6 +1,6 @@
 #include <xc.h>
 #include "UART.h"
-#include "ChipConfig.h""
+#include "ChipConfig.h"
 #include "cb_rx1.h"
 
 #define BAUDRATE 115200
@@ -36,18 +36,18 @@ void SendMessageDirect(unsigned char* message, int length) {
 
 //Interruption en mode loopback
 
-void __attribute__((interrupt, no_auto_psv)) _U1RXInterrupt(void) {
+/*void __attribute__((interrupt, no_auto_psv)) _U1RXInterrupt(void) {
     IFS0bits.U1RXIF = 0; // clear RX interrupt flag
-    /* check for receive errors */
+    // check for receive errors 
     if (U1STAbits.FERR == 1) {
         U1STAbits.FERR = 0;
     }
-    /* must clear the overrun error to keep uart receiving */
+    // must clear the overrun error to keep uart receiving 
     if (U1STAbits.OERR == 1) {
         U1STAbits.OERR = 0;
     }
-    /* get the data */
+    // get the data 
     while (U1STAbits.URXDA == 1) {
         U1TXREG = U1RXREG;
     }
-}
+}*/
