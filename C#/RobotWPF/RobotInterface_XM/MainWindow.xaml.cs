@@ -107,12 +107,17 @@ namespace RobotInterface_XM
 
         private void ButtonTest_Click(object sender, RoutedEventArgs e)
         {
-            byte[] byteList = new byte[20];
+            /*byte[] byteList = new byte[20];
             for (int i = 0; i < 20; i++)
             {
                 byteList[i] = (byte)(2 * i);
             }
-            serialPort1.Write(byteList, 0, 20);
+            serialPort1.Write(byteList, 0, 20);*/
+            int msgFunction = (int)0x0080;
+            string payload = "Bonjour";
+            int msgPayloadLength = payload.Length;
+            byte[] msgPayload = Encoding.ASCII.GetBytes(payload);
+            UartEncodeAndSendMessage(msgFunction, msgPayloadLength,msgPayload);
         }
 
         byte CalculateChecksum(int msgFunction, int msgPayloadLength, byte[] msgPayload)
@@ -144,11 +149,58 @@ namespace RobotInterface_XM
                 message[pos++] = msgPayload[i];
             }
             message[pos++] = CalculateChecksum(msgFunction, msgPayloadLength, msgPayload);
-            serialPort1.Write(message, 0, pos);
+            serialPort1.Write(message, 0, msgPayloadLength + 6);
 
         }
+
+        /*public enum StateReception
+        {
+            Waiting, FunctionMSB, FunctionLSB, PayloadLengthMSB, PayloadLengthLSB, Payload, Checksum;
+        }
+        StateReception rcvState = StateReception.Waiting;
+        int msgDecodedFunction = 0;
+        int msgDecodedPayloadLength = 0;
+        byte[] msgDecodedPayload;
+        int msgDecodedPayloadIndex = 0;
+
+        private void DecodeMessage(byte c)
+        {
+            switch (rcvState)
+            {
+                case StateReception.Waiting:
+
+                    break;
+                case StateReception.FunctionMSB:
+                    ...
+                    break;
+                case StateReception.FunctionLSB:
+                    ...
+                    break;
+                case StateReception.PayloadLengthMSB:
+                    ...
+                    break;
+                case StateReception.PayloadLengthLSB:
+                    ...
+                    break;
+                case StateReception.Payload:
+                    ...
+                    break;
+                case StateReception.CheckSum:
+                    ...
+                    if (calculatedChecksum == receivedChecksum)
+                    {
+                        //Success, on a un message valide
+                    }
+                    ...
+                    break;
+                default:
+                    rcvState = StateReception.Waiting;
+                    break;
+            }
+        } */
 
     }
 }
 
 
+// byte[] array = Encoding.ASCII.GetBytes(s);
