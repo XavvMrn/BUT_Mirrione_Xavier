@@ -153,10 +153,17 @@ namespace RobotInterface_XM
 
         }
 
-        /*public enum StateReception
+        public enum StateReception
         {
-            Waiting, FunctionMSB, FunctionLSB, PayloadLengthMSB, PayloadLengthLSB, Payload, Checksum;
+            Waiting, 
+            FunctionMSB, 
+            FunctionLSB, 
+            PayloadLengthMSB, 
+            PayloadLengthLSB, 
+            Payload, 
+            Checksum
         }
+
         StateReception rcvState = StateReception.Waiting;
         int msgDecodedFunction = 0;
         int msgDecodedPayloadLength = 0;
@@ -168,36 +175,65 @@ namespace RobotInterface_XM
             switch (rcvState)
             {
                 case StateReception.Waiting:
+                    if (c == 0xFE)
+                        rcvState = StateReception.FunctionMSB;
+                    break;
 
-                    break;
                 case StateReception.FunctionMSB:
-                    ...
+                    msgDecodedFunction = c << 8;
+                    rcvState = StateReception.FunctionLSB;
                     break;
+
                 case StateReception.FunctionLSB:
-                    ...
+                    msgDecodedFunction += c << 0;
+                    rcvState = StateReception.PayloadLengthMSB;
                     break;
+
                 case StateReception.PayloadLengthMSB:
-                    ...
+                    msgDecodedFunction = c << 8;
+                    rcvState = StateReception.PayloadLengthLSB;
                     break;
+
                 case StateReception.PayloadLengthLSB:
-                    ...
-                    break;
-                case StateReception.Payload:
-                    ...
-                    break;
-                case StateReception.CheckSum:
-                    ...
-                    if (calculatedChecksum == receivedChecksum)
+                    msgDecodedFunction += c << 0;
+
+                    if (msgDecodedPayloadLength == 0)
+                        rcvState = StateReception.Checksum;
+                    else
                     {
+                        msgDecodedPayload = new byte[msgDecodedPayloadLength];
+                        msgDecodedPayloadIndex = 0;
+                        rcvState = StateReception.Payload;
+                    }
+                    break;
+
+                case StateReception.Payload:
+                    msgDecodedPayload[msgDecodedPayloadIndex] = c ;
+                    msgDecodedPayloadIndex++;
+                    if (msgDecodedPayloadIndex >= msgDecodedPayloadLength)
+                    {                        
+                        rcvState = StateReception.Checksum;
+                    }
+                    break;
+
+                case StateReception.Checksum:
+                    if(c==CalculateChecksum(msgDecodedFunction, msgDecodedPayloadLength, msgDecodedPayload))
+                    {
+                        textBoxReception.Text = "OK";
                         //Success, on a un message valide
                     }
-                    ...
+                    else
+                    {
+                        textBoxReception.Text = "NOK";
+                    }
+                    rcvState = StateReception.Waiting;
                     break;
+
                 default:
                     rcvState = StateReception.Waiting;
                     break;
             }
-        } */
+        } 
 
     }
 }
