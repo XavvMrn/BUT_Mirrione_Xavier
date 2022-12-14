@@ -54,6 +54,7 @@ namespace RobotInterface_XM
             {
                 var c = robot.byteListReceived.Dequeue();
                 textBoxReception.Text += "0x" + c.ToString("X2") + " ";
+                DecodeMessage(c);
             }
 
         }
@@ -117,7 +118,7 @@ namespace RobotInterface_XM
             string payload = "Bonjour";
             int msgPayloadLength = payload.Length;
             byte[] msgPayload = Encoding.ASCII.GetBytes(payload);
-            UartEncodeAndSendMessage(msgFunction, msgPayloadLength,msgPayload);
+            UartEncodeAndSendMessage(msgFunction, msgPayloadLength, msgPayload);
         }
 
         byte CalculateChecksum(int msgFunction, int msgPayloadLength, byte[] msgPayload)
@@ -155,12 +156,12 @@ namespace RobotInterface_XM
 
         public enum StateReception
         {
-            Waiting, 
-            FunctionMSB, 
-            FunctionLSB, 
-            PayloadLengthMSB, 
-            PayloadLengthLSB, 
-            Payload, 
+            Waiting,
+            FunctionMSB,
+            FunctionLSB,
+            PayloadLengthMSB,
+            PayloadLengthLSB,
+            Payload,
             Checksum
         }
 
@@ -190,12 +191,12 @@ namespace RobotInterface_XM
                     break;
 
                 case StateReception.PayloadLengthMSB:
-                    msgDecodedFunction = c << 8;
+                    msgDecodedPayloadLength = c << 8;
                     rcvState = StateReception.PayloadLengthLSB;
                     break;
 
                 case StateReception.PayloadLengthLSB:
-                    msgDecodedFunction += c << 0;
+                    msgDecodedPayloadLength += c << 0;
 
                     if (msgDecodedPayloadLength == 0)
                         rcvState = StateReception.Checksum;
@@ -208,23 +209,24 @@ namespace RobotInterface_XM
                     break;
 
                 case StateReception.Payload:
-                    msgDecodedPayload[msgDecodedPayloadIndex] = c ;
+                    msgDecodedPayload[msgDecodedPayloadIndex] = c;
                     msgDecodedPayloadIndex++;
                     if (msgDecodedPayloadIndex >= msgDecodedPayloadLength)
-                    {                        
+                    {
                         rcvState = StateReception.Checksum;
                     }
                     break;
 
                 case StateReception.Checksum:
-                    if(c==CalculateChecksum(msgDecodedFunction, msgDecodedPayloadLength, msgDecodedPayload))
+                    if (c == CalculateChecksum(msgDecodedFunction, msgDecodedPayloadLength, msgDecodedPayload))
                     {
-                        textBoxReception.Text = "OK";
+                        textBoxReception.Text += " OK\n";
                         //Success, on a un message valide
+                        ProcessDecodedMessage(msgDecodedFunction, msgDecodedPayloadLength, msgDecodedPayload);
                     }
                     else
                     {
-                        textBoxReception.Text = "NOK";
+                        textBoxReception.Text += " Not OK\n";
                     }
                     rcvState = StateReception.Waiting;
                     break;
@@ -233,8 +235,35 @@ namespace RobotInterface_XM
                     rcvState = StateReception.Waiting;
                     break;
             }
-        } 
+        }
 
+        public enum IdFunction
+        {
+            TransmissionText = 0x0080,
+            LED = 0x0020,
+            DistanceTelemIR = 0x0030,
+            MotorSpeed = 0x0040
+        }
+
+        void ProcessDecodedMessage(int msgFunction, int msgPayloadLength, byte[] msgPayload)
+        {
+            switch ((IdFunction)msgFunction)
+            {
+                case IdFunction.TransmissionText:
+                    textBoxReception.Text += Encoding.ASCII.GetString(msgPayload);
+                    break;
+
+                case IdFunction.LED:
+
+                    break;
+
+                case IdFunction.DistanceTelemIR:
+                    break;
+
+                case IdFunction.MotorSpeed:
+                    break;
+            }
+        }
     }
 }
 
