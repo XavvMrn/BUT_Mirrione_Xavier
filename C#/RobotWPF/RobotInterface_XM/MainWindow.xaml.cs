@@ -120,6 +120,7 @@ namespace RobotInterface_XM
             byte[] msgPayload = Encoding.ASCII.GetBytes(payload);
             UartEncodeAndSendMessage(msgFunction, msgPayloadLength, msgPayload);
 
+            // LED
             msgPayload = new byte[] { 0, 1 };
             UartEncodeAndSendMessage((int)IdFunction.LED, 2, msgPayload);
             msgPayload = new byte[] { 1, 1 };
@@ -127,9 +128,11 @@ namespace RobotInterface_XM
             msgPayload = new byte[] { 2, 1 };
             UartEncodeAndSendMessage((int)IdFunction.LED, 2, msgPayload);
 
+            // IR
             msgPayload = new byte[] { 45, 67, 89 };
             UartEncodeAndSendMessage((int)IdFunction.DistanceTelemIR, 3, msgPayload);
 
+            // MotorSpeed
             msgPayload = new byte[] { 45, 50 };
             UartEncodeAndSendMessage((int)IdFunction.MotorSpeed, 2, msgPayload);
         }
