@@ -12,6 +12,9 @@ public class Robot
         public float distanceTelemetreDroit;
         public float distanceTelemetreCentre;
         public float distanceTelemetreGauche;
+
+        public int MotorSpeedGauche;
+        public int MotorSpeedCentre;
         public Queue<byte> byteListReceived = new Queue<byte>();
         public Robot()
         {

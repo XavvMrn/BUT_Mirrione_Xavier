@@ -36,7 +36,7 @@ namespace RobotInterface_XM
             timerAffichage.Tick += TimerAffichage_Tick;
             timerAffichage.Start();
 
-            serialPort1 = new ReliableSerialPort("COM4", 115200, Parity.None, 8, StopBits.One);
+            serialPort1 = new ReliableSerialPort("COM7", 115200, Parity.None, 8, StopBits.One);
             serialPort1.DataReceived += SerialPort1_DataReceived;
             serialPort1.Open();
 
@@ -119,6 +119,19 @@ namespace RobotInterface_XM
             int msgPayloadLength = payload.Length;
             byte[] msgPayload = Encoding.ASCII.GetBytes(payload);
             UartEncodeAndSendMessage(msgFunction, msgPayloadLength, msgPayload);
+
+            msgPayload = new byte[] { 0, 1 };
+            UartEncodeAndSendMessage((int)IdFunction.LED, 2, msgPayload);
+            msgPayload = new byte[] { 1, 1 };
+            UartEncodeAndSendMessage((int)IdFunction.LED, 2, msgPayload);
+            msgPayload = new byte[] { 2, 1 };
+            UartEncodeAndSendMessage((int)IdFunction.LED, 2, msgPayload);
+
+            msgPayload = new byte[] { 45, 67, 89 };
+            UartEncodeAndSendMessage((int)IdFunction.DistanceTelemIR, 3, msgPayload);
+
+            msgPayload = new byte[] { 45, 50 };
+            UartEncodeAndSendMessage((int)IdFunction.MotorSpeed, 2, msgPayload);
         }
 
         byte CalculateChecksum(int msgFunction, int msgPayloadLength, byte[] msgPayload)
@@ -254,15 +267,50 @@ namespace RobotInterface_XM
                     break;
 
                 case IdFunction.LED:
-
+                    if(msgPayloadLength==2)
+                    {
+                        switch(msgPayload[0])
+                        {
+                            case 0:
+                                LED1.IsChecked = (msgPayload[1] == 1);
+                                break;
+                            case 1:
+                                LED2.IsChecked = (msgPayload[1] == 1);
+                                break;
+                            case 2:
+                                LED3.IsChecked = (msgPayload[1] == 1);
+                                break;
+                        }
+                    }
                     break;
-
                 case IdFunction.DistanceTelemIR:
+                    if (msgPayloadLength == 3)
+                    {
+                        robot.distanceTelemetreGauche = (float)msgPayload[0];
+                        robot.distanceTelemetreCentre = (float)msgPayload[1];
+                        robot.distanceTelemetreDroit = (float)msgPayload[2];
+                        TelemtextBox.Text = "IR Gauche : " + robot.distanceTelemetreGauche.ToString("N2");
+                        TelemtextBox1.Text = "IR Centre : " + robot.distanceTelemetreCentre.ToString("N2");
+                        TelemtextBox2.Text = "IR Droit : " + robot.distanceTelemetreDroit.ToString("N2");
+                    }
+
                     break;
 
                 case IdFunction.MotorSpeed:
+                    if (msgPayloadLength == 2)
+                    {
+                        robot.MotorSpeedGauche = (int)msgPayload[0];
+                        robot.MotorSpeedCentre = (int)msgPayload[1];
+                        MotortextBox.Text = "Vitesse Gauche : " + robot.MotorSpeedGauche.ToString("N2") + " %";
+                        MotortextBox1.Text = "Vitesse Droit : " + robot.MotorSpeedCentre.ToString("N2") + " %";
+                    }
                     break;
             }
+        }
+
+        private void checkBox_Checked(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }
