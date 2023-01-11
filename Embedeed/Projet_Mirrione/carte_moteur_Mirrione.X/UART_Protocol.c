@@ -10,7 +10,7 @@ enum IdFunction {
     LED = 0x0020,
     DistanceTelemIR = 0x0030,
     MotorSpeed = 0x0040,
-    State = 0x0050
+    State = 0x0050,
 };
 
 unsigned char UartCalculateChecksum(int msgFunction, int msgPayloadLength, unsigned char* msgPayload) {
@@ -141,10 +141,29 @@ void UartProcessDecodedMessage(unsigned char function,
         case MotorSpeed:
             ;
             break;
+        case SET_ROBOT_STATE:
+            SetRobotState(msgPayload[0]);
+            break;
+        case SET_ROBOT_MANUAL_CONTROL:
+            SetRobotAutoControlState(msgPayload[0]);
+            break;
+        default:
+        break;
+
     }
 }
 
+void SetRobotState(unsigned char function,
+        unsigned char msgPayloadLength, unsigned char* msgPayload) {
+    
+    
+}
 
+void SetRobotAutoControlState(unsigned char function,
+        unsigned char msgPayloadLength, unsigned char* msgPayload) {
+    
+    
+}
 //*************************************************************************/
 //Fonctions correspondant aux messages
 //*************************************************************************/

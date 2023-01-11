@@ -37,9 +37,10 @@ int main(void) {
 
 
         int i;
-        for (i = 0; i < CB_RX1_GetDataSize(); i++) {
+        for (i = 0; i < CB_RX1_GetDataSize(); i++) { 
             unsigned char c = CB_RX1_Get();            
-            SendMessage(&c, 1);
+            //SendMessage(&c, 1);   // renvoie des trames recues 
+            UartDecodeMessage(c);
         }
 
         if (ADCIsConversionFinished() == 1) {
@@ -72,7 +73,7 @@ int main(void) {
             }
 
             if (robotState.distanceTelemetreGauche2 < 30) {
-                LED_BLANCHE = 1;
+                LED_BLANCHE = 1;    
             } else if (robotState.distanceTelemetreGauche < 30) {
                 LED_BLANCHE = 1;
             } else {
