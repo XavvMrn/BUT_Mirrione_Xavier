@@ -9,10 +9,11 @@
 #include "PWM.h"
 #include "ADC.h"
 #include "Robot.h"
-#include "OS.h"
+#include "State.h"
 #include "UART.h"
 #include "cb_tx1.h"
 #include "cb_rx1.h"
+#include "UART_Protocol.h"
 
 unsigned int *result;
 
@@ -37,10 +38,9 @@ int main(void) {
 
         int i;
         for (i = 0; i < CB_RX1_GetDataSize(); i++) {
-            unsigned char c = CB_RX1_Get();
+            unsigned char c = CB_RX1_Get();            
             SendMessage(&c, 1);
         }
-        __delay32(10000);
 
         if (ADCIsConversionFinished() == 1) {
             ADCClearConversionFinishedFlag();
@@ -83,6 +83,13 @@ int main(void) {
             //SendMessage("Bonjour", 7);
             //            SendMessageDirect((unsigned char*) "DAC", 3);
             //            __delay32(40000000);
+            
+            //unsigned char payload[] = {'B','o','n','j','o','u','r'};
+            //    UartEncodeAndSendMessage(0x0080, 7, payload);
+            unsigned char payload[] = {robotState.distanceTelemetreGauche,
+            robotState.distanceTelemetreCentre,robotState.distanceTelemetreDroit};
+                UartEncodeAndSendMessage(0x0030, 3, payload);
+                
 
         }
     }

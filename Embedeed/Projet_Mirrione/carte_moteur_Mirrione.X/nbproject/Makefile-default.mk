@@ -57,17 +57,17 @@ OBJECTDIR=build/${CND_CONF}/${IMAGE_TYPE}
 DISTDIR=dist/${CND_CONF}/${IMAGE_TYPE}
 
 # Source Files Quoted if spaced
-SOURCEFILES_QUOTED_IF_SPACED=main.c ChipConfig.c IO.c timer.c ToolBox.c PWM.c Robot.c ADC.c OS.c UART.c cb_tx1.c cb_rx1.c UART_Protocol.c
+SOURCEFILES_QUOTED_IF_SPACED=main.c ChipConfig.c IO.c timer.c ToolBox.c PWM.c Robot.c ADC.c UART.c cb_tx1.c cb_rx1.c UART_Protocol.c State.c
 
 # Object Files Quoted if spaced
-OBJECTFILES_QUOTED_IF_SPACED=${OBJECTDIR}/main.o ${OBJECTDIR}/ChipConfig.o ${OBJECTDIR}/IO.o ${OBJECTDIR}/timer.o ${OBJECTDIR}/ToolBox.o ${OBJECTDIR}/PWM.o ${OBJECTDIR}/Robot.o ${OBJECTDIR}/ADC.o ${OBJECTDIR}/OS.o ${OBJECTDIR}/UART.o ${OBJECTDIR}/cb_tx1.o ${OBJECTDIR}/cb_rx1.o ${OBJECTDIR}/UART_Protocol.o
-POSSIBLE_DEPFILES=${OBJECTDIR}/main.o.d ${OBJECTDIR}/ChipConfig.o.d ${OBJECTDIR}/IO.o.d ${OBJECTDIR}/timer.o.d ${OBJECTDIR}/ToolBox.o.d ${OBJECTDIR}/PWM.o.d ${OBJECTDIR}/Robot.o.d ${OBJECTDIR}/ADC.o.d ${OBJECTDIR}/OS.o.d ${OBJECTDIR}/UART.o.d ${OBJECTDIR}/cb_tx1.o.d ${OBJECTDIR}/cb_rx1.o.d ${OBJECTDIR}/UART_Protocol.o.d
+OBJECTFILES_QUOTED_IF_SPACED=${OBJECTDIR}/main.o ${OBJECTDIR}/ChipConfig.o ${OBJECTDIR}/IO.o ${OBJECTDIR}/timer.o ${OBJECTDIR}/ToolBox.o ${OBJECTDIR}/PWM.o ${OBJECTDIR}/Robot.o ${OBJECTDIR}/ADC.o ${OBJECTDIR}/UART.o ${OBJECTDIR}/cb_tx1.o ${OBJECTDIR}/cb_rx1.o ${OBJECTDIR}/UART_Protocol.o ${OBJECTDIR}/State.o
+POSSIBLE_DEPFILES=${OBJECTDIR}/main.o.d ${OBJECTDIR}/ChipConfig.o.d ${OBJECTDIR}/IO.o.d ${OBJECTDIR}/timer.o.d ${OBJECTDIR}/ToolBox.o.d ${OBJECTDIR}/PWM.o.d ${OBJECTDIR}/Robot.o.d ${OBJECTDIR}/ADC.o.d ${OBJECTDIR}/UART.o.d ${OBJECTDIR}/cb_tx1.o.d ${OBJECTDIR}/cb_rx1.o.d ${OBJECTDIR}/UART_Protocol.o.d ${OBJECTDIR}/State.o.d
 
 # Object Files
-OBJECTFILES=${OBJECTDIR}/main.o ${OBJECTDIR}/ChipConfig.o ${OBJECTDIR}/IO.o ${OBJECTDIR}/timer.o ${OBJECTDIR}/ToolBox.o ${OBJECTDIR}/PWM.o ${OBJECTDIR}/Robot.o ${OBJECTDIR}/ADC.o ${OBJECTDIR}/OS.o ${OBJECTDIR}/UART.o ${OBJECTDIR}/cb_tx1.o ${OBJECTDIR}/cb_rx1.o ${OBJECTDIR}/UART_Protocol.o
+OBJECTFILES=${OBJECTDIR}/main.o ${OBJECTDIR}/ChipConfig.o ${OBJECTDIR}/IO.o ${OBJECTDIR}/timer.o ${OBJECTDIR}/ToolBox.o ${OBJECTDIR}/PWM.o ${OBJECTDIR}/Robot.o ${OBJECTDIR}/ADC.o ${OBJECTDIR}/UART.o ${OBJECTDIR}/cb_tx1.o ${OBJECTDIR}/cb_rx1.o ${OBJECTDIR}/UART_Protocol.o ${OBJECTDIR}/State.o
 
 # Source Files
-SOURCEFILES=main.c ChipConfig.c IO.c timer.c ToolBox.c PWM.c Robot.c ADC.c OS.c UART.c cb_tx1.c cb_rx1.c UART_Protocol.c
+SOURCEFILES=main.c ChipConfig.c IO.c timer.c ToolBox.c PWM.c Robot.c ADC.c UART.c cb_tx1.c cb_rx1.c UART_Protocol.c State.c
 
 
 
@@ -143,12 +143,6 @@ ${OBJECTDIR}/ADC.o: ADC.c  .generated_files/flags/default/b97ae18482cb35bb2b63f4
 	@${RM} ${OBJECTDIR}/ADC.o 
 	${MP_CC} $(MP_EXTRA_CC_PRE)  ADC.c  -o ${OBJECTDIR}/ADC.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MP -MMD -MF "${OBJECTDIR}/ADC.o.d"      -g -D__DEBUG -D__MPLAB_DEBUGGER_ICD4=1  -mno-eds-warn  -omf=elf -DXPRJ_default=$(CND_CONF)  -legacy-libc  $(COMPARISON_BUILD)  -O0 -msmart-io=1 -Wall -msfr-warn=off    -mdfp="${DFP_DIR}/xc16"
 	
-${OBJECTDIR}/OS.o: OS.c  .generated_files/flags/default/5bc9761515592d27f1ba60e57aa28aa44f9461c .generated_files/flags/default/168b633b52a46c5b8b8a05feadf3c077d6e15a18
-	@${MKDIR} "${OBJECTDIR}" 
-	@${RM} ${OBJECTDIR}/OS.o.d 
-	@${RM} ${OBJECTDIR}/OS.o 
-	${MP_CC} $(MP_EXTRA_CC_PRE)  OS.c  -o ${OBJECTDIR}/OS.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MP -MMD -MF "${OBJECTDIR}/OS.o.d"      -g -D__DEBUG -D__MPLAB_DEBUGGER_ICD4=1  -mno-eds-warn  -omf=elf -DXPRJ_default=$(CND_CONF)  -legacy-libc  $(COMPARISON_BUILD)  -O0 -msmart-io=1 -Wall -msfr-warn=off    -mdfp="${DFP_DIR}/xc16"
-	
 ${OBJECTDIR}/UART.o: UART.c  .generated_files/flags/default/e315f0576d748a5992bd4fc3502832ce1a37266e .generated_files/flags/default/168b633b52a46c5b8b8a05feadf3c077d6e15a18
 	@${MKDIR} "${OBJECTDIR}" 
 	@${RM} ${OBJECTDIR}/UART.o.d 
@@ -172,6 +166,12 @@ ${OBJECTDIR}/UART_Protocol.o: UART_Protocol.c  .generated_files/flags/default/2b
 	@${RM} ${OBJECTDIR}/UART_Protocol.o.d 
 	@${RM} ${OBJECTDIR}/UART_Protocol.o 
 	${MP_CC} $(MP_EXTRA_CC_PRE)  UART_Protocol.c  -o ${OBJECTDIR}/UART_Protocol.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MP -MMD -MF "${OBJECTDIR}/UART_Protocol.o.d"      -g -D__DEBUG -D__MPLAB_DEBUGGER_ICD4=1  -mno-eds-warn  -omf=elf -DXPRJ_default=$(CND_CONF)  -legacy-libc  $(COMPARISON_BUILD)  -O0 -msmart-io=1 -Wall -msfr-warn=off    -mdfp="${DFP_DIR}/xc16"
+	
+${OBJECTDIR}/State.o: State.c  .generated_files/flags/default/cb73d86dfa9ea82643c44846ae3fad54a2402576 .generated_files/flags/default/168b633b52a46c5b8b8a05feadf3c077d6e15a18
+	@${MKDIR} "${OBJECTDIR}" 
+	@${RM} ${OBJECTDIR}/State.o.d 
+	@${RM} ${OBJECTDIR}/State.o 
+	${MP_CC} $(MP_EXTRA_CC_PRE)  State.c  -o ${OBJECTDIR}/State.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MP -MMD -MF "${OBJECTDIR}/State.o.d"      -g -D__DEBUG -D__MPLAB_DEBUGGER_ICD4=1  -mno-eds-warn  -omf=elf -DXPRJ_default=$(CND_CONF)  -legacy-libc  $(COMPARISON_BUILD)  -O0 -msmart-io=1 -Wall -msfr-warn=off    -mdfp="${DFP_DIR}/xc16"
 	
 else
 ${OBJECTDIR}/main.o: main.c  .generated_files/flags/default/bc50b1ff478ae88fe0612187c54bc8887daa1ed7 .generated_files/flags/default/168b633b52a46c5b8b8a05feadf3c077d6e15a18
@@ -222,12 +222,6 @@ ${OBJECTDIR}/ADC.o: ADC.c  .generated_files/flags/default/b4c882c2ae512dff08311b
 	@${RM} ${OBJECTDIR}/ADC.o 
 	${MP_CC} $(MP_EXTRA_CC_PRE)  ADC.c  -o ${OBJECTDIR}/ADC.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MP -MMD -MF "${OBJECTDIR}/ADC.o.d"      -mno-eds-warn  -g -omf=elf -DXPRJ_default=$(CND_CONF)  -legacy-libc  $(COMPARISON_BUILD)  -O0 -msmart-io=1 -Wall -msfr-warn=off    -mdfp="${DFP_DIR}/xc16"
 	
-${OBJECTDIR}/OS.o: OS.c  .generated_files/flags/default/461b939c571720ba5d8b876b4c6d04310d5b2659 .generated_files/flags/default/168b633b52a46c5b8b8a05feadf3c077d6e15a18
-	@${MKDIR} "${OBJECTDIR}" 
-	@${RM} ${OBJECTDIR}/OS.o.d 
-	@${RM} ${OBJECTDIR}/OS.o 
-	${MP_CC} $(MP_EXTRA_CC_PRE)  OS.c  -o ${OBJECTDIR}/OS.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MP -MMD -MF "${OBJECTDIR}/OS.o.d"      -mno-eds-warn  -g -omf=elf -DXPRJ_default=$(CND_CONF)  -legacy-libc  $(COMPARISON_BUILD)  -O0 -msmart-io=1 -Wall -msfr-warn=off    -mdfp="${DFP_DIR}/xc16"
-	
 ${OBJECTDIR}/UART.o: UART.c  .generated_files/flags/default/736d3433da29616b0e1fcff4093bc18bb6205e97 .generated_files/flags/default/168b633b52a46c5b8b8a05feadf3c077d6e15a18
 	@${MKDIR} "${OBJECTDIR}" 
 	@${RM} ${OBJECTDIR}/UART.o.d 
@@ -251,6 +245,12 @@ ${OBJECTDIR}/UART_Protocol.o: UART_Protocol.c  .generated_files/flags/default/c5
 	@${RM} ${OBJECTDIR}/UART_Protocol.o.d 
 	@${RM} ${OBJECTDIR}/UART_Protocol.o 
 	${MP_CC} $(MP_EXTRA_CC_PRE)  UART_Protocol.c  -o ${OBJECTDIR}/UART_Protocol.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MP -MMD -MF "${OBJECTDIR}/UART_Protocol.o.d"      -mno-eds-warn  -g -omf=elf -DXPRJ_default=$(CND_CONF)  -legacy-libc  $(COMPARISON_BUILD)  -O0 -msmart-io=1 -Wall -msfr-warn=off    -mdfp="${DFP_DIR}/xc16"
+	
+${OBJECTDIR}/State.o: State.c  .generated_files/flags/default/cb015e7c1d25243baf78aada7ca7185df8a6b4de .generated_files/flags/default/168b633b52a46c5b8b8a05feadf3c077d6e15a18
+	@${MKDIR} "${OBJECTDIR}" 
+	@${RM} ${OBJECTDIR}/State.o.d 
+	@${RM} ${OBJECTDIR}/State.o 
+	${MP_CC} $(MP_EXTRA_CC_PRE)  State.c  -o ${OBJECTDIR}/State.o  -c -mcpu=$(MP_PROCESSOR_OPTION)  -MP -MMD -MF "${OBJECTDIR}/State.o.d"      -mno-eds-warn  -g -omf=elf -DXPRJ_default=$(CND_CONF)  -legacy-libc  $(COMPARISON_BUILD)  -O0 -msmart-io=1 -Wall -msfr-warn=off    -mdfp="${DFP_DIR}/xc16"
 	
 endif
 

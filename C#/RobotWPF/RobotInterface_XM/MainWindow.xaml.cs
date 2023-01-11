@@ -53,7 +53,7 @@ namespace RobotInterface_XM
             while (robot.byteListReceived.Count > 0)
             {
                 var c = robot.byteListReceived.Dequeue();
-                textBoxReception.Text += "0x" + c.ToString("X2") + " ";
+                //textBoxReception.Text += "0x" + c.ToString("X2") + " ";
                 DecodeMessage(c);
             }
 
@@ -258,7 +258,42 @@ namespace RobotInterface_XM
             TransmissionText = 0x0080,
             LED = 0x0020,
             DistanceTelemIR = 0x0030,
-            MotorSpeed = 0x0040
+            MotorSpeed = 0x0040,
+            State = 0x0050,
+        }
+        public enum StateRobot
+        {
+            STATE_ATTENTE = 0,
+            STATE_ATTENTE_EN_COURS = 1,
+            STATE_AVANCE = 2,
+            STATE_AVANCE_EN_COURS = 3,
+            STATE_TOURNE_GAUCHE = 4,
+            STATE_TOURNE_GAUCHE_EN_COURS = 5,
+            STATE_TOURNE_DROITE = 6,
+            STATE_TOURNE_DROITE_EN_COURS = 7,
+            STATE_TOURNE_SUR_PLACE_GAUCHE = 8,
+            STATE_TOURNE_SUR_PLACE_GAUCHE_EN_COURS = 9,
+            STATE_TOURNE_SUR_PLACE_DROITE = 10,
+            STATE_TOURNE_SUR_PLACE_DROITE_EN_COURS = 11,
+            STATE_ARRET = 12,
+            STATE_ARRET_EN_COURS = 13,
+            STATE_RECULE = 14,
+            STATE_RECULE_EN_COURS = 15,
+            STATE_RECULE_PAR_GAUCHE = 16,
+            STATE_RECULE_PAR_GAUCHE_EN_COURS = 17,
+            STATE_RECULE_PAR_DROITE = 18,
+            STATE_RECULE_PAR_DROITE_EN_COURS = 19,
+            STATE_RECULE_UN_PEU_GAUCHE = 20,
+            STATE_RECULE_UN_PEU_GAUCHE_EN_COURS = 21,
+            STATE_RECULE_UN_PEU_DROITE = 22,
+            STATE_RECULE_UN_PEU_DROITE_EN_COURS = 23,
+            STATE_TOURNE_UN_PEU_GAUCHE = 24,
+            STATE_TOURNE_UN_PEU_GAUCHE_EN_COURS = 25,
+            STATE_TOURNE_UN_PEU_DROITE = 26,
+            STATE_TOURNE_BCP_GAUCHE_EN_COURS = 29,
+            STATE_TOURNE_BCP_DROITE = 30,
+            STATE_TOURNE_BCP_DROITE_EN_COURS = 31 ,
+            STATE_180 = 32
         }
 
         void ProcessDecodedMessage(int msgFunction, int msgPayloadLength, byte[] msgPayload)
@@ -307,6 +342,12 @@ namespace RobotInterface_XM
                         MotortextBox.Text = "Vitesse Gauche : " + robot.MotorSpeedGauche.ToString("N2") + " %";
                         MotortextBox1.Text = "Vitesse Droit : " + robot.MotorSpeedCentre.ToString("N2") + " %";
                     }
+                    break;
+                case IdFunction.State:
+                    int instant = (((int)msgPayload[1]) << 24) 
+                        + (((int)msgPayload[2]) << 16)+ (((int)msgPayload[3]) << 8) + ((int)msgPayload[4]);
+                    textBoxReception.Text += "Nouvel état : "
+                        + ((StateRobot)(msgPayload[0])).ToString() + "␣-␣" + instant.ToString() + "␣ms"; ;
                     break;
             }
         }

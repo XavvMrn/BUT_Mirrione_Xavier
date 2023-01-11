@@ -12,11 +12,11 @@
       <itemPath>Robot.h</itemPath>
       <itemPath>main.h</itemPath>
       <itemPath>ADC.h</itemPath>
-      <itemPath>OS.h</itemPath>
       <itemPath>UART.h</itemPath>
       <itemPath>cb_tx1.h</itemPath>
       <itemPath>cb_rx1.h</itemPath>
       <itemPath>UART_Protocol.h</itemPath>
+      <itemPath>State.h</itemPath>
     </logicalFolder>
     <logicalFolder name="LinkerScript"
                    displayName="Linker Files"
@@ -33,11 +33,11 @@
       <itemPath>PWM.c</itemPath>
       <itemPath>Robot.c</itemPath>
       <itemPath>ADC.c</itemPath>
-      <itemPath>OS.c</itemPath>
       <itemPath>UART.c</itemPath>
       <itemPath>cb_tx1.c</itemPath>
       <itemPath>cb_rx1.c</itemPath>
       <itemPath>UART_Protocol.c</itemPath>
+      <itemPath>State.c</itemPath>
     </logicalFolder>
     <logicalFolder name="ExternalFiles"
                    displayName="Important Files"

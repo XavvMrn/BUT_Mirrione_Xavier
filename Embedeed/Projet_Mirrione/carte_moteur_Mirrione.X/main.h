@@ -10,6 +10,8 @@
 
 #define FCY 40000000
 
+extern unsigned char autoControlActivated;
+
 
 #endif	/* MAIN_H */
 
