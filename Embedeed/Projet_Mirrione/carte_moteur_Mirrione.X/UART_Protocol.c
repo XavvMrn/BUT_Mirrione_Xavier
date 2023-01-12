@@ -157,6 +157,7 @@ void SetRobotState(unsigned char function,
         unsigned char msgPayloadLength, unsigned char* msgPayload) {
     
     
+
 }
 
 void SetRobotAutoControlState(unsigned char function,
